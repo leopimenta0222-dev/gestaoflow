@@ -1,0 +1,97 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---- Tokens: GestãoFlow — Bold Espresso ---- */
+@theme {
+  --font-display: "Sora", sans-serif;
+  --font-body: "Hanken Grotesk", system-ui, sans-serif;
+
+  --color-sidebar: #2b211b; /* sempre escura */
+  --color-sidebar-2: #241c16;
+  --color-sidebar-text: #e9ddd0;
+  --color-sidebar-muted: #a08d7d;
+
+  --color-accent: #b5731f;
+  --color-accent-bright: #e0a458;
+
+  /* semânticos (mapeiam para as vars de runtime do tema) */
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--border);
+  --color-text: var(--text);
+  --color-muted: var(--text-muted);
+  --color-faint: var(--text-faint);
+}
+
+/* Tema claro (default) */
+:root {
+  --bg: #f4efe9;
+  --surface: #ffffff;
+  --surface-2: #f7f2ec;
+  --border: #e6dccf;
+  --text: #2b211b;
+  --text-muted: #8a7766;
+  --text-faint: #b3a392;
+  color-scheme: light;
+}
+
+/* Tema escuro */
+.dark {
+  --bg: #1a1410;
+  --surface: #241c16;
+  --surface-2: #2c231c;
+  --border: #3a2f26;
+  --text: #efe7dd;
+  --text-muted: #a8978a;
+  --text-faint: #75665a;
+  color-scheme: dark;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: var(--accent-bright);
+  color: #2b211b;
+}
+
+/* scrollbars discretas */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal { animation: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
